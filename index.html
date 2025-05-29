@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Cảm ơn vì em đã đến</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    .text {
+      position: absolute;
+      color: #ff99ff;
+      font-size: 24px;
+      white-space: nowrap;
+      animation: moveText 10s linear infinite;
+      text-shadow: 0 0 10px #ff99ff;
+    }
+
+    @keyframes moveText {
+      from { transform: translateX(100vw); }
+      to { transform: translateX(-100vw); }
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      transform: rotate(45deg);
+      animation: floatHeart 8s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes floatHeart {
+      0% { bottom: 0; opacity: 0; }
+      50% { opacity: 1; }
+      100% { bottom: 100vh; opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+const texts = [
+  "Cảm ơn vì em đã đến",
+  "Anh yêu em nhiều lắm",
+  "Anh sẽ luôn bên cạnh em",
+  "Làm người yêu anh nhé ♡"
+];
+
+function createText() {
+  const textEl = document.createElement('div');
+  textEl.className = 'text';
+  textEl.innerText = texts[Math.floor(Math.random() * texts.length)];
+  textEl.style.top = Math.random() * window.innerHeight + "px";
+  textEl.style.left = "100vw";
+  textEl.style.fontSize = (16 + Math.random() * 20) + "px";
+  document.body.appendChild(textEl);
+
+  setTimeout(() => document.body.removeChild(textEl), 10000);
+}
+
+function createHeart() {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.style.left = Math.random() * window.innerWidth + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => document.body.removeChild(heart), 8000);
+}
+
+setInterval(createText, 300);
+setInterval(createHeart, 500);
+</script>
+</body>
+</html>
